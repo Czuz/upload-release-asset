@@ -1,6 +1,10 @@
 jest.mock('@actions/core');
 jest.mock('@actions/github');
-jest.mock('fs');
+jest.mock('fs', () => ({
+  promises: {
+    access: jest.fn()
+  }
+}));
 
 const core = require('@actions/core');
 const { GitHub, context } = require('@actions/github');
