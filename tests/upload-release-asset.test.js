@@ -7,7 +7,7 @@ jest.mock('fs', () => ({
 }));
 
 const core = require('@actions/core');
-const { GitHub, context } = require('@actions/github');
+const { getOctokit, context } = require('@actions/github');
 const fs = require('fs');
 const run = require('../src/upload-release-asset');
 
@@ -17,7 +17,9 @@ describe('Upload Release Asset', () => {
   let content;
 
   beforeEach(() => {
-    uploadReleaseAsset = jest.fn().mockReturnValueOnce({
+    jest.clearAllMocks();
+
+    uploadReleaseAsset = jest.fn().mockReturnValue({
       data: {
         browser_download_url: 'browserDownloadUrl'
       }
@@ -41,7 +43,7 @@ describe('Upload Release Asset', () => {
       }
     };
 
-    GitHub.mockImplementation(() => github);
+    getOctokit.mockImplementation(() => github);
   });
 
   test('Upload release asset endpoint is called', async () => {
@@ -85,7 +87,6 @@ describe('Upload Release Asset', () => {
       .mockReturnValueOnce('asset_name')
       .mockReturnValueOnce('asset_content_type');
 
-    uploadReleaseAsset.mockRestore();
     uploadReleaseAsset.mockImplementation(() => {
       throw new Error('Error uploading release asset');
     });
