@@ -29244,7 +29244,7 @@ async function run() {
       url: uploadUrl,
       headers,
       name: assetName,
-      file: fs.readFileSync(assetPath)
+      data: fs.readFileSync(assetPath)
     });
 
     // Get the browser_download_url for the uploaded release asset from the response
