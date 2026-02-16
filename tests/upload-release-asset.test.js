@@ -38,8 +38,10 @@ describe('Upload Release Asset', () => {
     };
 
     const github = {
-      repos: {
-        uploadReleaseAsset
+      rest: {
+        repos: {
+          uploadReleaseAsset
+        }
       }
     };
 
