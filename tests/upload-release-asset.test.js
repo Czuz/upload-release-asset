@@ -25,10 +25,6 @@ describe('Upload Release Asset', () => {
       }
     });
 
-    fs.statSync = jest.fn().mockReturnValueOnce({
-      size: 527
-    });
-
     content = Buffer.from('test content');
     fs.readFileSync = jest.fn().mockReturnValueOnce(content);
 
@@ -60,7 +56,7 @@ describe('Upload Release Asset', () => {
 
     expect(uploadReleaseAsset).toHaveBeenCalledWith({
       url: 'upload_url',
-      headers: { 'content-type': 'asset_content_type', 'content-length': 527 },
+      headers: { 'content-type': 'asset_content_type' },
       name: 'asset_name',
       file: content
     });
