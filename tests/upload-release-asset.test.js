@@ -58,7 +58,7 @@ describe('Upload Release Asset', () => {
       url: 'upload_url',
       headers: { 'content-type': 'asset_content_type' },
       name: 'asset_name',
-      file: content
+      data: content
     });
   });
 
